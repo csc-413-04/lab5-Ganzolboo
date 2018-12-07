@@ -4,11 +4,18 @@ const initialState = {
 };
 
 const testReducer = (state = initialState, action) => {
+    console.log(action.type)
     switch (action.type) {
-        case 'SET_TEST':
-            return Object.assign({}, state, {
-                test: action.test
-            });
+        case 'LOAD_MESSAGES':
+        return Object.assign({}, state, {
+            messages: action.messages,
+        });
+        case 'IMPORT_MESSAGES':
+        const newMessages = state.messages.slice(0);
+        newMessages.unshift(action.messages)
+        return Object.assign({}, state, {
+            messages: newMessages,
+        });
         default:
             return state;
     }
